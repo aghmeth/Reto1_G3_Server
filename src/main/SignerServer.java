@@ -11,4 +11,7 @@ package main;
  */
 public class SignerServer {
     
+    public static void main(String[] args){
+    
+    }
 }

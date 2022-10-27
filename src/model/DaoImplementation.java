@@ -84,7 +84,7 @@ public class DaoImplementation {
                 login = rs.getString(1);
                 email = rs.getString(1);
                 fullname = rs.getString(1);
-                status = rs.getByte(1);
+                status = rs.getInt(1);
                 priviledge = rs.getInt(1);
                 password = rs.getString(1);
                 lastPasswordChange = rs.getDate(1);
