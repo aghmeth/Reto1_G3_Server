@@ -30,8 +30,8 @@ public class DaoImplementation {
         private String password;
         private final String UserSignUp = "INSERT INTO usuarios VALUES('user.getId()','user.getLogin()','user.getEmail()','user.getFullname()'"
                 + ",'user.getStatus()','user.getPriviledge()','user.getPassword()','user.getLastPasswordChange()')";
-        private final String UserSignIn = "SELECT * FROM signin WHERE EXISTS (SELECT * FROM sigin WHERE "
-                + "sigin.id = 'user.getId()' AND sigin.lastSignin = 'getLastPasswordChange()')";
+        private final String UserSignIn = "SELECT * FROM signin WHERE EXISTS (SELECT * FROM signin WHERE "
+                + "signin.id = 'user.getId()' AND signin.lastSignin = 'user.getLastPasswordChange()')";
         
     public  DaoImplementation(){
         this.configFile = ResourceBundle.getBundle("Reto1.properties");
@@ -65,7 +65,7 @@ public class DaoImplementation {
     }
     public void UserGetSignUp(){
         ResultSet rs = null;
-        int id;
+        Integer id;
         String login;
         String email;
         String fullname;
@@ -73,12 +73,10 @@ public class DaoImplementation {
         int priviledge;
         String password;
         Date lastPasswordChange;
-        
         this.OpenConnection();
         try{
             stmt = conn.prepareStatement(UserSignUp);
             rs = stmt.executeQuery();
-            
             if(rs.next()){
                 id = rs.getInt(1);
                 login = rs.getString(1);
@@ -104,7 +102,7 @@ public class DaoImplementation {
     }
     public void UserGetSignIn(){
         ResultSet rs = null;
-        int id;
+        Integer id;
         Date lastSign;
         
         this.OpenConnection();

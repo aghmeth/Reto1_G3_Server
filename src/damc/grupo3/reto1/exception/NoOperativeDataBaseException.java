@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package damc.grupo3.reto1.model;
+package damc.grupo3.reto1.exception;
 
 /**
  *
  * @author 2dam
  */
-public class Thread {
+public class NoOperativeDataBaseException {
     
 }
