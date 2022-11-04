@@ -23,7 +23,7 @@ public class Hilo extends Thread {
     private MessageType messT;
     private User user;
     
-
+    
     public Hilo(Socket s) {
         this.s = s;
     }
