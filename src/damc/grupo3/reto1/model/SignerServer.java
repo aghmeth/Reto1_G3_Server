@@ -11,4 +11,9 @@ package damc.grupo3.reto1.model;
  */
 public class SignerServer {
     
+    public SignerServer() {
+        
+    }
+    
+    
 }
