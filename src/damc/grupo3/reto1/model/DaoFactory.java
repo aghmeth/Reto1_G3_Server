@@ -5,21 +5,22 @@
  */
 package damc.grupo3.reto1.model;
 
-import java.net.Socket;
 
 /**
  *
  * @author Diego
  */
 public class DaoFactory {
-    /*Los dao dependen de los hilos para que puedan atender a varios clientes, los hilos recogen
-    la informacion del SignInServer, un socket, por lo tanto nuestro Dao neceitara el socket
-    como parámetro*/
-    private Socket s;
-    //Generamos una constrcuion de Dao con el parámetro del Socket
-    private Hilo getDao(){
-        Hilo daoHilo;
-        daoHilo = new Hilo(s);
-         return daoHilo;
+    
+    private MessageType mst;
+    
+    public DaoImplementation getDao(){
+        DaoImplementation di = new DaoImplementation();
+        if(mst == mst.SIGNIN_REQUEST){
+            di.UserGetSignIn();
+        }else if(mst == mst.SIGNUP_REQUEST){
+            di.UserGetSignUp();
+        }   
+    return di;
     }
 }

@@ -51,7 +51,7 @@ public class SignInServer {
     
     public void setThread(){
         Socket sock = null; 
-        Hilo hilo = new Hilo(sock);
+        SignerThread hilo = new SignerThread(sock);
         //hilo.start();
     }
     public int getNumThread(){

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Diego
  */
-public class Hilo extends Thread {
+public class SignerThread extends Thread {
     private ObjectInputStream ois = null;
     private Socket s = null;
     private Message mess;
@@ -24,7 +24,7 @@ public class Hilo extends Thread {
     private User user;
     
     
-    public Hilo(Socket s) {
+    public SignerThread(Socket s) {
         this.s = s;
     }
     public void Run(){
@@ -40,9 +40,9 @@ public class Hilo extends Thread {
                 ois.close();
                 s.close();
         }catch(IOException e){
-                Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
         }catch (ClassNotFoundException e){
-                Logger.getLogger(Hilo.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
