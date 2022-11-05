@@ -52,7 +52,7 @@ public class SignInServer {
     public void setThread(){
         Socket sock = null; 
         Hilo hilo = new Hilo(sock);
-        hilo.start();
+        //hilo.start();
     }
     public int getNumThread(){
         int NumThread = 0, cont = 0;
