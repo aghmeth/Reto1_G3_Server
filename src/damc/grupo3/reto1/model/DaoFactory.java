@@ -5,21 +5,24 @@
  */
 package damc.grupo3.reto1.model;
 
+import damc.grupo3.reto1.exception.PasswordErrorException;
+import damc.grupo3.reto1.exception.ServerErrorException;
+import damc.grupo3.reto1.exception.UserAlreadyExitsException;
+import damc.grupo3.reto1.exception.UserNotFoundException;
 
 /**
  *
  * @author Diego
  */
 public class DaoFactory {
-    
     private MessageType mst;
-    
-    public DaoImplementation getDao(){
+    private User user;
+    public DaoImplementation getDao() throws PasswordErrorException, UserNotFoundException, ServerErrorException, UserAlreadyExitsException{
         DaoImplementation di = new DaoImplementation();
         if(mst == mst.SIGNIN_REQUEST){
-            di.UserGetSignIn();
+            di.UserGetSignIn(user);
         }else if(mst == mst.SIGNUP_REQUEST){
-            di.UserGetSignUp();
+            di.UserGetSignUp(user);
         }   
     return di;
     }
