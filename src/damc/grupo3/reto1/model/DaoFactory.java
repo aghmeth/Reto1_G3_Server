@@ -20,9 +20,9 @@ public class DaoFactory {
     public DaoImplementation getDao() throws PasswordErrorException, UserNotFoundException, ServerErrorException, UserAlreadyExitsException{
         DaoImplementation di = new DaoImplementation();
         if(mst == mst.SIGNIN_REQUEST){
-            di.UserGetSignIn(user);
+            di.getExecuteSignIn(user);
         }else if(mst == mst.SIGNUP_REQUEST){
-            di.UserGetSignUp(user);
+            di.getExecuteSignUp(user);
         }   
     return di;
     }
