@@ -17,12 +17,14 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author 2dam
+ * @author Jessica
  */
 public class SignerServer extends Thread{
-    private static final ResourceBundle RETO1 = ResourceBundle.getBundle("model.reto1");
-    private static final int MAX_USERS = Integer.parseInt(RETO1.getString("MaxUsers"));
-    private static final int PORT = Integer.parseInt(RETO1.getString("PORT"));
+    //private static final ResourceBundle RETO1 = ResourceBundle.getBundle("./damc/grupo3/reto1/Libraries/Config.properties");
+    //private static final int MAX_USERS = Integer.parseInt(RETO1.getString("MaxUsers"));
+    //private static final int PORT = Integer.parseInt(RETO1.getString("PORT"));
+    private static final int MAX_USERS = 10;
+    private static final int PORT = 5000;
 
     //private static ArrayList<SignerThread> acutalClients = new ArrayList<>();
 
@@ -31,7 +33,7 @@ public class SignerServer extends Thread{
     private static boolean serverOn = true;
     private ServerSocket svSocket;
     private Socket skClient;
-    private static Integer i;
+    private static Integer i = 0;
     private SignerThread st;
 
     /**
@@ -40,19 +42,22 @@ public class SignerServer extends Thread{
      */
 
 
-    public void makeThread () {  //Hay que enviarle algo?!?!?!?
-        
+    public SignerServer () {
+       
         try {
           svSocket = new ServerSocket(PORT);
-           
+          
           while (serverOn) {
+              
                 //Preguntar si no ha superado el limite de usuarios que pueden conectarse a la vez
                 if (i < MAX_USERS) {
-                     //EL servidor acepta un cliente y en soc guarda el socket de la conexion que se ha establecido
+                     //EL servidor acepta un cliente y en skClient guarda el socket de la conexion que se ha establecido
                     skClient = svSocket.accept();
+                    System.out.println("Cliente aceptado");
                     //Crear hilo pasándole el Socket skCliente
                     st = new SignerThread(skClient);
                     añadirCliente(st);
+                    System.out.println("Hilo creado");
                
                 } else {
                     
@@ -80,4 +85,7 @@ public class SignerServer extends Thread{
         i--;
     }
     
+    public static void main(String[] arg) {
+       new SignerServer(); 
+    }
 }
