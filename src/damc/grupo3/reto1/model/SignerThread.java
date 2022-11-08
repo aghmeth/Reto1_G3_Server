@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import damc.grupo3.reto1.model.Message;
+import java.util.ArrayList;
 /**
  *
  * @author Ale
@@ -19,13 +20,14 @@ import damc.grupo3.reto1.model.Message;
 public class SignerThread extends Thread{
     
     private final Socket skCliente;
+    MessageType mt;
     
-    public SignerThread(Socket skCliente) {
+    public SignerThread(Socket skCliente, MessageType mt) {
         this.skCliente = skCliente;
+        this.mt = mt;
     }
     
     public synchronized void run() {
-        MessageType mt;
         boolean terminar = true;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
@@ -37,7 +39,7 @@ public class SignerThread extends Thread{
             m.getMessageType();
             
             DaoFactory df = new DaoFactory();
-            df.getDao();
+            df.getDao(mt);
             
             oos = new ObjectOutputStream(skCliente.getOutputStream());
             m.getMessageType();

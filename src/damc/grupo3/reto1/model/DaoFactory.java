@@ -12,13 +12,13 @@ package damc.grupo3.reto1.model;
  */
 public class DaoFactory {
     
-    private MessageType mst;
+    MessageType mt;
     
-    public DaoImplementation getDao(){
+    public DaoImplementation getDao(MessageType mt){
         DaoImplementation di = new DaoImplementation();
-        if(mst == mst.SIGNIN_REQUEST){
+        if(mt == mt.SIGNIN_REQUEST){
             //di.UserGetSignIn();
-        }else if(mst == mst.SIGNUP_REQUEST){
+        }else if(mt == mt.SIGNUP_REQUEST){
             //di.UserGetSignUp();
         }   
     return di;
