@@ -5,16 +5,44 @@
  */
 package damc.grupo3.reto1.model;
 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author 2dam
+ * @author Diego
  */
-public class SignerThread {
-
-    SignerThread(Socket skClient) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class SignerThread extends Thread {
+    private ObjectInputStream ois = null;
+    private Socket s = null;
+    private Message mess;
+    private MessageType messT;
+    private User user;
     
+    
+    public SignerThread(Socket s) {
+        this.s = s;
+    }
+    public void Run(){
+        int cont = 0;
+        try{
+            ois = new ObjectInputStream(s.getInputStream());
+            cont++;
+            do{
+                mess = (Message) ois.readObject();
+                messT = (MessageType) ois.readObject();
+                user = (User) ois.readObject();
+            }while(cont <= 10);
+                ois.close();
+                s.close();
+        }catch(IOException e){
+                Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
+        }catch (ClassNotFoundException e){
+                Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }
