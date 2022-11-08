@@ -5,8 +5,10 @@
  */
 package damc.grupo3.reto1.model;
 
+import damc.grupo3.reto1.exception.ConnectionException;
 import damc.grupo3.reto1.exception.NoOperativeDataBaseException;
 import damc.grupo3.reto1.exception.TimeOutException;
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -36,12 +38,13 @@ public class Pool {
      *
      * 
      */
-    public void openConnection() throws NoOperativeDataBaseException {
+    public void openConnection() throws ConnectionException, NoOperativeDataBaseException {
         this.configFile = ResourceBundle.getBundle("model.Reto1");
         this.driverBD = configFile.getString("DRIVERDB");
         this.urlDB = configFile.getString("URLDB");
         this.userDB = configFile.getString("USERDB");
         this.passDB = configFile.getString("PASSDB");
+        
         try {
             Connection conn = DriverManager.getConnection(urlDB, userDB, passDB);
             //push añadir una conexion a la pila 
@@ -55,7 +58,7 @@ public class Pool {
      * Lanzamos excepciones
      *
      */
-    public void createStackPool() throws SQLException, NoOperativeDataBaseException {
+    public void createStackPool() throws SQLException, NoOperativeDataBaseException, ConnectionException {
         //Creamos  un Stack donde se alcenaran las conexiones.
         poolStack = new Stack<>();
         this.openConnection();

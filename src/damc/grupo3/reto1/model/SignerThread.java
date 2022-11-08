@@ -5,10 +5,16 @@
  */
 package damc.grupo3.reto1.model;
 
+import java.net.Socket;
+
 /**
  *
  * @author 2dam
  */
 public class SignerThread {
+
+    SignerThread(Socket skClient) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
