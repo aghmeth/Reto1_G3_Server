@@ -40,8 +40,8 @@ public class SignerServer extends Thread{
      */
 
 
-    public void run () {
-       
+    public void makeThread () {  //Hay que enviarle algo?!?!?!?
+        
         try {
           svSocket = new ServerSocket(PORT);
            

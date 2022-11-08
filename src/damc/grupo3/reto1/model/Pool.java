@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  * @author 2dam
  */
 public class Pool {
-     private static final Logger LOG = Logger.getLogger(Pool.class.getName());
+
+    private static final Logger LOG = Logger.getLogger(Pool.class.getName());
     // fichero config.properties
     private ResourceBundle configFile;
     private String driverBD;
@@ -36,15 +37,15 @@ public class Pool {
     /**
      * Metodo para hacer la conexion con la base de datos
      *
-     * 
+     *
      */
     public void openConnection() throws ConnectionException, NoOperativeDataBaseException {
-        this.configFile = ResourceBundle.getBundle("model.Reto1");
+        this.configFile = ResourceBundle.getBundle("");//ruta de config.properties (que se llama reto1)
         this.driverBD = configFile.getString("DRIVERDB");
         this.urlDB = configFile.getString("URLDB");
         this.userDB = configFile.getString("USERDB");
         this.passDB = configFile.getString("PASSDB");
-        
+
         try {
             Connection conn = DriverManager.getConnection(urlDB, userDB, passDB);
             //push añadir una conexion a la pila 
@@ -53,9 +54,10 @@ public class Pool {
             throw new NoOperativeDataBaseException(urlDB);
         }
     }
+
     /**
-     * creamos la colecion para almacenar las conexiones
-     * Lanzamos excepciones
+     * @return Para almacenar las conexiones hemos creado una coleccion STACK
+     * Lanzamos excepciones NoOperativeBaseException, ConnectionException
      *
      */
     public void createStackPool() throws SQLException, NoOperativeDataBaseException, ConnectionException {
@@ -63,21 +65,24 @@ public class Pool {
         poolStack = new Stack<>();
         this.openConnection();
     }
-/**
- * 
- * @return controla que solo haya un pool conection creado
- */
-    public static Pool poolInstance(){
+
+    /**
+     *
+     * @return controla que solo haya un pool conection creado
+     */
+    public static Pool poolInstance() {
         if (pool == null) {
             pool = new Pool();
             return pool;
         } else {
-           return pool;
+            return pool;
         }
     }
+
     /**
+     * @return Abrimo una conexion de la coleccion que hemos creado para guardar las conexiones 
      * Abrimos una conexion del stack que hemos creado anteriormente
-     * 
+     *
      */
     public Connection getConnection() throws TimeOutException {
         Connection conn = null;
@@ -86,13 +91,14 @@ public class Pool {
         }
         return conn;
     }
+
     /**
-     *cerrar una conexion cuando sea necesario
+     * cerrar una conexion cuando sea necesario
      *
      */
     public void closeConnection(Connection con) throws TimeOutException {
         LOG.info("Cerrar una conexion ");
         poolStack.push(con);
     }
-    
+
 }
