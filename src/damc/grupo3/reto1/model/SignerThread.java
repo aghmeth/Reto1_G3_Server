@@ -25,6 +25,7 @@ public class SignerThread extends Thread{
     }
     
     public synchronized void run() {
+        MessageType mt;
         boolean terminar = true;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
@@ -34,9 +35,13 @@ public class SignerThread extends Thread{
             Message m = (Message) ois.readObject();
             m.getUser();
             m.getMessageType();
-
-            DaoFactory df = new DaoFactory();
             
+            DaoFactory df = new DaoFactory();
+            df.getDao();
+            
+            oos = new ObjectOutputStream(skCliente.getOutputStream());
+            m.getMessageType();
+            oos.writeObject(m);
             
         } catch (IOException ex) {
             Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,10 +5,22 @@
  */
 package damc.grupo3.reto1.model;
 
+
 /**
  *
- * @author 2dam
+ * @author Diego
  */
 public class DaoFactory {
     
+    private MessageType mst;
+    
+    public DaoImplementation getDao(){
+        DaoImplementation di = new DaoImplementation();
+        if(mst == mst.SIGNIN_REQUEST){
+            //di.UserGetSignIn();
+        }else if(mst == mst.SIGNUP_REQUEST){
+            //di.UserGetSignUp();
+        }   
+    return di;
+    }
 }
