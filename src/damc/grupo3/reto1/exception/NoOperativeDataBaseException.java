@@ -9,10 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *This exception is ussed to show a message wich says the database is no operative
- * @author Alejandro
+ * This exception is ussed to show a message wich says the database is no
+ * operative
+ *
+ * @author Alejandro y Jessica
+ *
  */
-public class NoOperativeDataBaseException extends Exception{
+public class NoOperativeDataBaseException extends Exception {
+
     public NoOperativeDataBaseException(String msg) {
         super(msg);
     }

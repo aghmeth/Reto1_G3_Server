@@ -6,9 +6,19 @@
 package damc.grupo3.reto1.model;
 
 /**
- *
- * @author 2dam
+ * Reads the parameters of the 'SignerServer' and depending on the type of 
+ * message executes one of the mehods of the dao implementation
+ * @author Diego
  */
 public class DaoFactory {
-    
+   
+    /**
+     * Method that returns one of the methods that we have in the implementation
+     * @return sign
+     */
+    public Sign getDao() {
+        Sign sign;
+        sign = new DaoImplementation();
+        return sign;
+    }
 }

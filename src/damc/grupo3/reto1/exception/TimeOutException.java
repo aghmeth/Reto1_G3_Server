@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *This exception is used to show a message wich says the connection to the database took too long
- * @author Alejandro
+ * This exception is used to show a message wich says the connection to the database took too long
+ * @author Alejandro y Jessica
  */
 public class TimeOutException extends Exception{
     public TimeOutException(String msg) {

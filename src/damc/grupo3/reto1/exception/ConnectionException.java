@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *This exception shows a message saying that there was an error connecting with the database
- * @author Alejandro
+ * This exception shows a message saying that there was an error connecting with the database
+ * @author Alejandro y Jessica
  */
 public class ConnectionException extends Exception{
     public ConnectionException(String msg) {
