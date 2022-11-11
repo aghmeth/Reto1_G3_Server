@@ -5,25 +5,20 @@
  */
 package damc.grupo3.reto1.model;
 
-import damc.grupo3.reto1.exception.PasswordErrorException;
-import damc.grupo3.reto1.exception.ServerErrorException;
-import damc.grupo3.reto1.exception.UserAlreadyExitsException;
-import damc.grupo3.reto1.exception.UserNotFoundException;
-
 /**
- *
+ * Reads the parameters of the 'SignerServer' and depending on the type of 
+ * message executes one of the mehods of the dao implementation
  * @author Diego
  */
 public class DaoFactory {
-    private MessageType mst;
-    private User user;
-    public DaoImplementation getDao() throws PasswordErrorException, UserNotFoundException, ServerErrorException, UserAlreadyExitsException{
-        DaoImplementation di = new DaoImplementation();
-        if(mst == mst.SIGNIN_REQUEST){
-            di.getExecuteSignIn(user);
-        }else if(mst == mst.SIGNUP_REQUEST){
-            di.getExecuteSignUp(user);
-        }   
-    return di;
+   
+    /**
+     * Method that returns one of the methods that we have in the implementation
+     * @return sign
+     */
+    public Sign getDao() {
+        Sign sign;
+        sign = new DaoImplementation();
+        return sign;
     }
 }

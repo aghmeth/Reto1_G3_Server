@@ -5,10 +5,15 @@
  */
 package damc.grupo3.reto1.exception;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
- * @author 2dam
+ * This exception shows a message saying that there was an error connecting with the database
+ * @author Alejandro y Jessica
  */
-public class ConnectionException {
-    
+public class ConnectionException extends Exception{
+    public ConnectionException(String msg) {
+        super(msg);
+    }
 }

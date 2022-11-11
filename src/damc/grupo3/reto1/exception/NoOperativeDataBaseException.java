@@ -5,10 +5,19 @@
  */
 package damc.grupo3.reto1.exception;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
+ * This exception is ussed to show a message wich says the database is no
+ * operative
  *
- * @author 2dam
+ * @author Alejandro y Jessica
+ *
  */
-public class NoOperativeDataBaseException {
-    
+public class NoOperativeDataBaseException extends Exception {
+
+    public NoOperativeDataBaseException(String msg) {
+        super(msg);
+    }
 }

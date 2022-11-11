@@ -5,10 +5,15 @@
  */
 package damc.grupo3.reto1.exception;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
- * @author 2dam
+ * This exception is used to show a message wich says the connection to the database took too long
+ * @author Alejandro y Jessica
  */
-public class TimeOutException {
-    
+public class TimeOutException extends Exception{
+    public TimeOutException(String msg) {
+        super(msg);
+    }
 }
