@@ -40,6 +40,8 @@ public class DaoImplementation implements Sign{
         final String DataCheck = "SELECT * FROM usuario WHERE login = ? AND passwd = ?";
         //Secuencia SQL para insertar los datos, una vez han sido comprobados a la tabla signin
         final String InsertDataSignIn = "INSERT INTO signin VALUES(?, ?)";
+        //Sentencia para comprobar que el usuario recien introducido no coincide con niguno de los introducidos anteriormente
+        final String UsrCheck = "SELECT * FROM usuario WHERE login NOT LIKE ? AND fullname NOT LIKE ? AND email NOT LIKE ?";
         
         
         
@@ -74,27 +76,37 @@ public class DaoImplementation implements Sign{
             Date lastPasswordChange;
             conn = pool.getConnection();
             try{
-                stmt = conn.prepareStatement(InsertDataSignUp);
-                //Pillamos los parametros de la ventana de SignUp
+                stmt = conn.prepareStatement(UsrCheck);
                 stmt.setString(1, user.getLogin());
-                stmt.setString(2, user.getEmail());
-                stmt.setString(3, user.getFullname());
-                stmt.setString(4, "enabled"); // enabled
-                stmt.setString(5, "user");// user
-                stmt.setString(6, user.getPassword());
-                stmt.executeUpdate();
-                if(rs.next()){
-                    //Almacenamos los datos en la tabla de usuarios
-                    user.setId(rs.getInt("id"));
-                    user.setLogin(rs.getString("login"));
-                    user.setEmail(rs.getString("email"));
-                    user.setFullname(rs.getString("fullname"));
-                    user.setStatus(UserStatus.values()[rs.getInt("status")]);
-                    user.setPrivilegde(UserPrivilege.values()[rs.getInt("priviledge")]);
-                    user.setPassword(rs.getString("passwd"));
-                    user.setLastPasswordChange(rs.getDate("lastPasswordChange"));
-                }else{
-                    throw new SQLException("Something went wrong while inserting data");
+                stmt.setString(2, user.getFullname());
+                stmt.setString(3, user.getEmail());
+                
+                if (rs.next()) {
+                    stmt = conn.prepareStatement(InsertDataSignUp);
+                    //Pillamos los parametros de la ventana de SignUp
+                    stmt.setString(1, user.getLogin());
+                    stmt.setString(2, user.getEmail());
+                    stmt.setString(3, user.getFullname());
+                    stmt.setString(4, "enabled"); // enabled
+                    stmt.setString(5, "user");// user
+                    stmt.setString(6, user.getPassword());
+                    stmt.executeUpdate();
+                
+                    if(rs.next()){
+                        //Almacenamos los datos en la tabla de usuarios
+                        user.setId(rs.getInt("id"));
+                        user.setLogin(rs.getString("login"));
+                        user.setEmail(rs.getString("email"));
+                        user.setFullname(rs.getString("fullname"));
+                        user.setStatus(UserStatus.values()[rs.getInt("status")]);
+                        user.setPrivilegde(UserPrivilege.values()[rs.getInt("priviledge")]);
+                        user.setPassword(rs.getString("passwd"));
+                        user.setLastPasswordChange(rs.getDate("lastPasswordChange"));                    
+                    }else{
+                        throw new SQLException("Something went wrong while inserting data");
+                    }
+                }else {
+                    throw new UserAlreadyExitsException("The user already exists");
                 }
             }catch(SQLException e){
                 e.printStackTrace();

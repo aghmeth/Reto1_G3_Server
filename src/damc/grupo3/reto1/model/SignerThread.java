@@ -73,7 +73,7 @@ public class SignerThread extends Thread {
                         break;
                      
                 }
-               
+            sleep(60000);
         }catch(IOException e){
             encap.setMessage(MessageType.ERROR_RESPONSE);
                 Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
@@ -92,6 +92,8 @@ public class SignerThread extends Thread {
         }catch(UserAlreadyExitsException e){
             encap.setMessage(MessageType.USER_ALREADY_EXISTS_RESPONSE);
             Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, e);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SignerThread.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try {
                 oos = new ObjectOutputStream(s.getOutputStream());

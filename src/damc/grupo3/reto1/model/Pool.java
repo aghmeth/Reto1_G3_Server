@@ -8,7 +8,6 @@ package damc.grupo3.reto1.model;
 import damc.grupo3.reto1.exception.ConnectionException;
 import damc.grupo3.reto1.exception.NoOperativeDataBaseException;
 import damc.grupo3.reto1.exception.TimeOutException;
-import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
